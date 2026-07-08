@@ -1,0 +1,30 @@
+# Environment files
+.env
+.env.*
+*.env
+
+# Secrets and credentials
+**/secrets/
+*.pem
+*.key
+credentials.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Snowflake session files
+snowflake_session/
+.snowflake/
+
+# Temp files
+*.tmp
+*.bak
+*.log
