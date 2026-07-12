@@ -1,0 +1,44 @@
+{
+  "name": "Snowflake Dev Environment",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "snowflake.snowflake-vsc",
+        "innoverio.vscode-dbt-power-user",
+        "ms-python.python",
+        "ms-python.black-formatter",
+        "charliermarsh.ruff",
+        "redhat.vscode-yaml",
+        "mechatroner.rainbow-csv"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "editor.formatOnSave": true,
+        "files.associations": {
+          "*.sql": "jinja-sql"
+        },
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "mounts": [
+    "source=${localEnv:HOME}/.snowflake,target=/home/vscode/.snowflake,type=bind,consistency=cached"
+  ],
+  "remoteEnv": {
+    "SNOWFLAKE_DEFAULT_CONNECTION_NAME": "default"
+  },
+  "forwardPorts": [8501, 8080],
+  "portsAttributes": {
+    "8501": { "label": "Streamlit", "onAutoForward": "notify" },
+    "8080": { "label": "API Server", "onAutoForward": "notify" }
+  }
+}
